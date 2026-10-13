@@ -1,0 +1,38 @@
+@prefix fit: <https://example.org/fitness#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+fit:Center a owl:Class ;
+    rdfs:label "센터"@ko, "Center"@en ;
+    rdfs:comment "회원이 소속되는 피트니스 센터입니다."@ko .
+fit:Member a owl:Class ;
+    rdfs:label "회원"@ko, "Member"@en ;
+    rdfs:comment "센터에 소속된 회원입니다."@ko .
+fit:Payment a owl:Class ;
+    rdfs:label "결제"@ko, "Payment"@en ;
+    rdfs:comment "회원이 지불한 금액을 기록합니다."@ko .
+fit:Refund a owl:Class ;
+    rdfs:label "환불"@ko, "Refund"@en ;
+    rdfs:comment "원래 결제에 연결된 환불입니다."@ko .
+
+fit:memberOf a owl:ObjectProperty ;
+    rdfs:domain fit:Member ; rdfs:range fit:Center ;
+    rdfs:label "소속 센터"@ko, "member of"@en ;
+    rdfs:comment "회원과 소속 센터를 연결합니다."@ko .
+fit:paidBy a owl:ObjectProperty ;
+    rdfs:domain fit:Payment ; rdfs:range fit:Member ;
+    rdfs:label "결제 회원"@ko, "paid by"@en ;
+    rdfs:comment "결제와 지불한 회원을 연결합니다."@ko .
+fit:refundOf a owl:ObjectProperty ;
+    rdfs:domain fit:Refund ; rdfs:range fit:Payment ;
+    rdfs:label "원래 결제"@ko, "refund of"@en ;
+    rdfs:comment "환불과 원래 결제를 연결합니다."@ko .
+fit:amount a owl:DatatypeProperty ;
+    rdfs:domain fit:Payment ; rdfs:range xsd:integer ;
+    rdfs:label "결제 금액"@ko, "payment amount"@en ;
+    rdfs:comment "원 단위의 정수 결제 금액입니다."@ko .
+fit:refundAmount a owl:DatatypeProperty ;
+    rdfs:domain fit:Refund ; rdfs:range xsd:integer ;
+    rdfs:label "환불 금액"@ko, "refund amount"@en ;
+    rdfs:comment "원 단위의 정수 환불 금액입니다."@ko .

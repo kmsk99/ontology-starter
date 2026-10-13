@@ -1,0 +1,35 @@
+@prefix fit: <https://example.org/fitness#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+# 규칙 1: 환불은 결제 한 건에 연결되어야 합니다.
+fit:RefundShape a sh:NodeShape ;
+    sh:targetClass fit:Refund ;
+    sh:property [
+        sh:path fit:refundOf ;
+        sh:minCount 1 ; sh:maxCount 1 ; sh:class fit:Payment ;
+        sh:message "환불은 Payment 정확히 한 개에 연결되어야 합니다."@ko,
+                   "A refund must link to exactly one Payment."@en
+    ] .
+
+# 규칙 2: 결제별로 모든 환불 금액을 더해 비교합니다.
+fit:PaymentShape a sh:NodeShape ;
+    sh:targetClass fit:Payment ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "환불 합계({?total})가 결제 금액({?amount})을 넘습니다"@ko,
+                   "Refund total ({?total}) exceeds payment amount ({?amount})"@en ;
+        sh:select """
+            PREFIX fit: <https://example.org/fitness#>
+            SELECT $this ?total ?amount WHERE {
+                { SELECT $this (SUM(?refundAmount) AS ?total) WHERE {
+                    ?refund fit:refundOf $this ;
+                            fit:refundAmount ?refundAmount .
+                  } GROUP BY $this }
+                $this fit:amount ?amount .
+                FILTER (?total > ?amount)
+            }
+        """
+    ] .
+
+# 시청자 과제: "환불의 센터가 결제의 센터와 다르면 거절"
+# 먼저 센터 관계를 모델링한 뒤 여기에 규칙을 추가해 보세요.

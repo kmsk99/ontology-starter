@@ -1,0 +1,9 @@
+@prefix fit: <https://example.org/fitness#> .
+
+# 모두 가상의 센터, 회원, 결제, 환불입니다. 금액 단위는 원입니다.
+fit:sampleCenter a fit:Center .
+fit:sampleMember a fit:Member ; fit:memberOf fit:sampleCenter .
+fit:samplePayment a fit:Payment ;
+    fit:paidBy fit:sampleMember ; fit:amount 1000 .
+fit:sampleRefund a fit:Refund ;
+    fit:refundOf fit:samplePayment ; fit:refundAmount 300 .
