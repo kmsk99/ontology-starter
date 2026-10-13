@@ -25,7 +25,7 @@ python3 -m venv .venv
 | `ontology.ttl` | 클래스 4개와 관계·금액 속성 5개 |
 | `shapes.ttl` | 원래 결제 정확히 1개, 환불 합계 ≤ 결제 금액 규칙 |
 | `data/ok.ttl` | 1,000원 결제와 300원 환불 |
-| `data/over.ttl` | 1,000원 결제와 1,001원 환불 |
+| `data/over.ttl` | 1,000원 결제와 1,100원 환불 |
 | `check.py` | SHACL 검증과 결과 메시지 출력 |
 | `requirements.txt` | 실제 검증한 라이브러리 버전 |
 | `LICENSE` | MIT 라이선스, Mason Kim |
@@ -74,7 +74,7 @@ results match expectations**. Each dataset is validated independently with the o
 | `ontology.ttl` | Four classes and five relationship/amount properties |
 | `shapes.ttl` | Exactly one original payment; refund total ≤ payment amount |
 | `data/ok.ttl` | Payment of 1,000 and refund of 300 |
-| `data/over.ttl` | Payment of 1,000 and refund of 1,001 |
+| `data/over.ttl` | Payment of 1,000 and refund of 1,100 |
 | `check.py` | SHACL validation and messages from the validation report |
 | `requirements.txt` | Library versions used for verification |
 | `LICENSE` | MIT license, Mason Kim |

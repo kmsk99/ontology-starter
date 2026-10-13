@@ -6,4 +6,4 @@ fit:sampleMember a fit:Member ; fit:memberOf fit:sampleCenter .
 fit:samplePayment a fit:Payment ;
     fit:paidBy fit:sampleMember ; fit:amount 1000 .
 fit:sampleRefund a fit:Refund ;
-    fit:refundOf fit:samplePayment ; fit:refundAmount 1001 .
+    fit:refundOf fit:samplePayment ; fit:refundAmount 1100 .
